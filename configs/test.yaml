@@ -1,0 +1,20 @@
+# base svd model path
+base_model_path: models/SVD/stable-video-diffusion-img2vid-xt-1-1
+
+# checkpoint path
+ckpt_path: models/MimicMotion_v0.9.pth
+
+test_case:
+  - ref_video_path: assets/example_data/videos/pose1.mp4
+    ref_image_path: assets/example_data/images/demo1.jpg
+    num_frames: 16
+    resolution: 576
+    frames_overlap: 6
+    num_inference_steps: 25
+    noise_aug_strength: 0
+    guidance_scale: 2.0
+    sample_stride: 2
+    fps: 15
+    seed: 42
+
+
