@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="assets/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>MimicMotion</title>
+  <link href="static/css/style.css" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/x-icon" href="assets/images/MimicMotion.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <span style="background: linear-gradient(to right,  SeaGreen, YellowGreen, Gold, GreenYellow, ForestGreen); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                MimicMotion
+              </span>
+              : High-Quality Human Motion Video Generation with Confidence-aware Pose Guidance
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="#" target="_blank">Yuang Zhang</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Jiaxi Gu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Li-Wen Wang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Han Wang</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Junqi Cheng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Yuefeng Zhu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Fangyuan Zou</a><sup>1</sup>
+              </span>
+            </div>
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>Tencent</span>&nbsp&nbsp&nbsp
+                    <span class="author-block"><sup>2</sup>Shanghai Jiaotong University</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/tencent/MimicMotion" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2406.19680" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+
+<!-- End teaser video -->
+
+<!-- ---------------- BEGIN Showcases SECTION ------------------>
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- <h2 class="title is-3">Showcases: Long video generation</h2> -->
+      <div id="results-carousel" class="carousel results-carousel" data-autoplay-speed="30000">
+        <div class="item item-video3">
+          <th>
+            <video  width="300" src="assets/showcases/sample_3_pose.mp4" autoplay loop controls muted></video>
+          </th>
+          <th>
+            <img width="300" src="assets/showcases/sample_3.png" alt="MY ALT TEXT"/>
+        </th>     
+        <th>
+          <video  width="300" src="assets/showcases/sample_3.mp4" autoplay loop controls muted></video>
+        </th>
+        </div>
+        <div class="item item-video2">
+          <th>
+            <video  width="300" src="assets/showcases/sample_1_pose.mp4" autoplay loop controls muted></video>
+          </th>
+          <th>
+            <img width="300" src="assets/showcases/sample_1.png" alt="MY ALT TEXT"/>
+        </th>     
+        <th>
+          <video  width="300" src="assets/showcases/sample_1.mp4" autoplay loop controls muted></video>
+        </th>
+        </div>
+        <div class="item item-video1">
+          <th>
+            <video  width="300" src="assets/showcases/sample_2_pose.mp4" autoplay loop controls muted></video>
+          </th>
+          <th>
+            <img width="300" src="assets/showcases/sample_2.png" alt="MY ALT TEXT"/>
+        </th>     
+        <th>
+          <video  width="300" src="assets/showcases/sample_2.mp4" autoplay loop controls muted></video>
+        </th>
+        </div>
+        
+      </div>
+      Cases generated with face swapping and frame interpolation post-processing.
+    </div>
+    
+  </div>
+</section>
+<!-- End video carousel -->
+
+<section class="section hero is-light">
+  <div class="hero-body">
+    <div class="container">
+  <h2 class="title is-3">Showcases: Dancing&Talking</h2>
+  <p align="center">
+    Hover over to view the input reference images. Cases generated with face swapping and frame interpolation post-processing.
+  </p>
+<table  width="1000" align="center">
+  <tbody>
+    <tr>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_hb_pose.mp4" autoplay loop controls muted></video>
+          <img class="hover-image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_hb_0.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_hb_0.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_hb_1.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_hb_1.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video width="500" src="assets/showcases/sample_hb_2.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_hb_2.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_hb_3.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_hb_3.png" alt="Hover image">
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_fb_pose.mp4" autoplay loop controls muted></video>
+          <img class="hover-image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_fb_0.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_fb_0.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_fb_1.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_fb_1.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video width="500" src="assets/showcases/sample_fb_2.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_fb_2.png" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_fb_3.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_fb_3.png" alt="Hover image">
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_s0_pose.mp4" autoplay loop controls muted></video>
+          <img class="hover-image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_s0.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_s0.jpg" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video  width="500" src="assets/showcases/sample_s1.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_s1.jpg" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video width="500" src="assets/showcases/sample_s2.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_s2.jpg" alt="Hover image">
+        </div>
+      </th>
+      <th>
+        <div class="video-container">
+          <video width="500" src="assets/showcases/sample_s3.mp4" autoplay loop controls muted></video>
+          <img class="hover-image" src="assets/showcases/sample_s3.jpg" alt="Hover image">
+        </div>
+      </th>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+</section>
+  
+<!-- Video carousel2 -->
+<!-- <section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Showcases produced by our method ( )</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <th>
+            <video  width="300" src="assets/0000.mp4" autoplay loop controls muted></video>
+          </th>
+          <th>
+            <img width="300" src="assets/0000.jpg" alt="MY ALT TEXT"/>
+        </th>     
+        <th>
+          <video  width="300" src="assets/0000.mp4" autoplay loop controls muted></video>
+        </th>
+        </div>
+        <div class="item item-video2">
+          <th>
+            <video  width="300" src="assets/0001.mp4" autoplay loop controls muted></video>
+          </th>
+          <th>
+            <img width="300" src="assets/0001.jpg" alt="MY ALT TEXT"/>
+        </th>     
+        <th>
+          <video  width="300" src="assets/0001.mp4" autoplay loop controls muted></video>
+        </th>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End video carousel2 -->
+
+
+<!-- Video carousel2 -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Comparisons with baseline methods</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <!-- begin cmp1 -->
+        <div class="item item-video1">
+        <table  width="1000" align="center">
+          <tbody>
+            <tr>
+              <th style="font-size: 16px">GT</th>
+              <th style="font-size: 16px">Magic Dance</th>
+              <th style="font-size: 16px">Moore</th>
+            </tr>
+            <tr>
+              <th>
+                <video  width="300" src="assets/comparisons/raw_0.mp4" autoplay loop controls muted></video>
+              </th>
+                <th>
+                  <video  width="300" src="assets/comparisons/magic_dance_0.mp4" autoplay loop controls muted></video>
+                </th>    
+              <th>
+                <video  width="300" src="assets/comparisons/moore_0.mp4" autoplay loop controls muted></video>
+              </th>
+              </tr>
+              <tr>
+                <th style="font-size: 16px"> </th>
+                <th style="font-size: 16px">Musev</th>
+                <th style="font-size: 16px">MimicMotion(Ours)</th>
+              </tr>
+              <tr>
+              <th>
+                <video  width="300" ></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/musev_0.mp4" autoplay loop controls muted></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/ours_0.mp4" autoplay loop controls muted></video>
+              </th>
+            </tr>
+
+                      <tr> <td><br /></td> </tr> 
+          </tbody>
+        </table>
+      </div>
+      <!-- end cmp1 -->
+      <!-- begin cmp2 -->
+        <div class="item item-video2">
+        <table  width="1000" align="center">
+          <tbody>
+            <tr>
+              <th style="font-size: 16px">GT</th>
+              <th style="font-size: 16px">Magic Dance</th>
+              <th style="font-size: 16px">Moore</th>
+            </tr>
+            <tr>
+              <th>
+                <video  width="300" src="assets/comparisons/raw_1.mp4" autoplay loop controls muted></video>
+              </th>
+                <th>
+                  <video  width="300" src="assets/comparisons/magic_dance_1.mp4" autoplay loop controls muted></video>
+                </th>    
+              <th>
+                <video  width="300" src="assets/comparisons/moore_1.mp4" autoplay loop controls muted></video>
+              </th>
+              </tr>
+              <tr>
+                <th style="font-size: 16px"> </th>
+                <th style="font-size: 16px">Musev</th>
+                <th style="font-size: 16px">MimicMotion(Ours)</th>
+              </tr>
+              <tr>
+              <th>
+                <video  width="300" ></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/musev_1.mp4" autoplay loop controls muted></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/ours_1.mp4" autoplay loop controls muted></video>
+              </th>
+            </tr>
+                      <tr> <td><br /></td> </tr> 
+          </tbody>
+        </table>
+      </div>
+      <!-- end cmp2 -->
+      <!-- begin cmp3 -->
+      <div class="item item-video2">
+        <table  width="1000" align="center">
+          <tbody>
+            <tr>
+              <th style="font-size: 16px">GT</th>
+              <th style="font-size: 16px">Magic Dance</th>
+              <th style="font-size: 16px">Moore</th>
+            </tr>
+            <tr>
+              <th>
+                <video  width="300" src="assets/comparisons/raw_2.mp4" autoplay loop controls muted></video>
+              </th>
+                <th>
+                  <video  width="300" src="assets/comparisons/magic_dance_2.mp4" autoplay loop controls muted></video>
+                </th>    
+              <th>
+                <video  width="300" src="assets/comparisons/moore_2.mp4" autoplay loop controls muted></video>
+              </th>
+              </tr>
+              <tr>
+                <th style="font-size: 16px"> </th>
+                <th style="font-size: 16px">Musev</th>
+                <th style="font-size: 16px">MimicMotion(Ours)</th>
+              </tr>
+              <tr>
+              <th>
+                <video  width="300" ></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/musev_2.mp4" autoplay loop controls muted></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/ours_2.mp4" autoplay loop controls muted></video>
+              </th>
+            </tr>
+                      <tr> <td><br /></td> </tr> 
+          </tbody>
+        </table>
+      </div>
+      <!-- end cmp3 -->
+      <!-- begin cmp4 -->
+      <div class="item item-video4">
+        <table  width="1000" align="center">
+          <tbody>
+            <tr>
+              <th style="font-size: 16px">GT</th>
+              <th style="font-size: 16px">Magic Dance</th>
+              <th style="font-size: 16px">Moore</th>
+            </tr>
+            <tr>
+              <th>
+                <video  width="300" src="assets/comparisons/raw_3.mp4" autoplay loop controls muted></video>
+              </th>
+                <th>
+                  <video  width="300" src="assets/comparisons/magic_dance_3.mp4" autoplay loop controls muted></video>
+                </th>    
+              <th>
+                <video  width="300" src="assets/comparisons/moore_3.mp4" autoplay loop controls muted></video>
+              </th>
+              </tr>
+              <tr>
+                <th style="font-size: 16px"> </th>
+                <th style="font-size: 16px">Musev</th>
+                <th style="font-size: 16px">MimicMotion(Ours)</th>
+              </tr>
+              <tr>
+              <th>
+                <video  width="300" ></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/musev_3.mp4" autoplay loop controls muted></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/ours_3.mp4" autoplay loop controls muted></video>
+              </th>
+            </tr>
+                      <tr> <td><br /></td> </tr> 
+          </tbody>
+        </table>
+      </div>
+      <!-- end cmp4 -->
+            <!-- begin cmp4 -->
+            <div class="item item-video4">
+              <table  width="1000" align="center">
+                <tbody>
+                  <tr>
+                    <th style="font-size: 16px">GT</th>
+                    <th style="font-size: 16px">Magic Dance</th>
+                    <th style="font-size: 16px">Moore</th>
+                  </tr>
+                  <tr>
+                    <th>
+                      <video  width="300" src="assets/comparisons/raw_4.mp4" autoplay loop controls muted></video>
+                    </th>
+                      <th>
+                        <video  width="300" src="assets/comparisons/magic_dance_4.mp4" autoplay loop controls muted></video>
+                      </th>    
+                    <th>
+                      <video  width="300" src="assets/comparisons/moore_4.mp4" autoplay loop controls muted></video>
+                    </th>
+                    </tr>
+                    <tr>
+                      <th style="font-size: 16px"> </th>
+                      <th style="font-size: 16px">Musev</th>
+                      <th style="font-size: 16px">MimicMotion(Ours)</th>
+                    </tr>
+                    <tr>
+                    <th>
+                      <video  width="300" ></video>
+                    </th>
+                    <th>
+                      <video  width="300" src="assets/comparisons/musev_4.mp4" autoplay loop controls muted></video>
+                    </th>
+                    <th>
+                      <video  width="300" src="assets/comparisons/ours_4.mp4" autoplay loop controls muted></video>
+                    </th>
+                  </tr>
+                            <tr> <td><br /></td> </tr> 
+                </tbody>
+              </table>
+            </div>
+            <!-- end cmp5 -->
+                  <!-- begin cmp6 -->
+      <div class="item item-video4">
+        <table  width="1000" align="center">
+          <tbody>
+            <tr>
+              <th style="font-size: 16px">GT</th>
+              <th style="font-size: 16px">Magic Dance</th>
+              <th style="font-size: 16px">Moore</th>
+            </tr>
+            <tr>
+              <th>
+                <video  width="300" src="assets/comparisons/raw_5.mp4" autoplay loop controls muted></video>
+              </th>
+                <th>
+                  <video  width="300" src="assets/comparisons/magic_dance_5.mp4" autoplay loop controls muted></video>
+                </th>    
+              <th>
+                <video  width="300" src="assets/comparisons/moore_5.mp4" autoplay loop controls muted></video>
+              </th>
+              </tr>
+              <tr>
+                <th style="font-size: 16px"> </th>
+                <th style="font-size: 16px">Musev</th>
+                <th style="font-size: 16px">MimicMotion(Ours)</th>
+              </tr>
+              <tr>
+              <th>
+                <video  width="300" ></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/musev_5.mp4" autoplay loop controls muted></video>
+              </th>
+              <th>
+                <video  width="300" src="assets/comparisons/ours_5.mp4" autoplay loop controls muted></video>
+              </th>
+            </tr>
+                      <tr> <td><br /></td> </tr> 
+          </tbody>
+        </table>
+      </div>
+      <!-- end cmp6 -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End video carousel2 -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In recent years, generative artificial intelligence has achieved significant advancements in the field of image generation, spawning a variety of applications. However, video generation still faces considerable challenges in various aspects such as controllability, video length, and richness of details, which hinder the application and popularization of this technology. In this work, we propose a controllable video generation framework, dubbed MimicMotion, which can generate high-quality videos of arbitrary length with any motion guidance. Comparing with previous methods, our approach has several highlights. Firstly, with confidence-aware pose guidance, temporal smoothness can be achieved so model robustness can be enhanced with large-scale training data. Secondly, regional loss amplification based on pose confidence significantly eases the distortion of image significantly. Lastly, for generating long smooth videos, a progressive latent fusion strategy is proposed. By this means, videos of arbitrary length can be generated with acceptable resource consumption. With extensive experiments and user studies, MimicMotion demonstrates significant improvements over previous approaches in multiple aspects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Paper method -->
+<section class="hero is-small">
+  <div class="container is-max-desktop">
+    <!-- Method -->
+    <div class="hero-body">
+      <div class="content has-text-justified">
+        <h2 class="title is-3">Method</h2>
+        <p>
+          MimicMotion integrates an image-to-video diffusion model with novel confidence-aware pose guidance.
+The model's trainable components consist of a spatiotemporal U-Net and a PoseNet for introducing pose sequence as the condition.
+Key features of confidence-aware pose guidance include:
+1) The pose sequence is accompanied by keypoint confidence scores, enabling the model to adaptively adjust the influence of pose guidance based on the score.
+2) The regions with high confidence are given greater weight in the loss function, amplifying their impact in training.
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/fig1.png" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Model structure based on the pre-trained SVD.
+      </h2>
+    <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Confidence-aware pose guiding</h3>
+        <p>
+          We utilize brightness on the pose guidance frame to represent the confidence level of pose estimation. </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/pose_conf_method.jpg" style="max-width: 480px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Illustration of confidence-aware pose guiding.
+      </h2>
+    <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Region-specific hands refiner</h3>
+        <p>
+          We implement a masking strategy that generate masks based on a confidence threshold.
+          We unmask areas where confidence scores surpass a predefined threshold, thereby identifying reliable regions.
+          When computing the loss of the video diffusion model, the loss values corresponding to the unmasked regions are amplified by a certain scale so they can be take more effect on the model training than other masked regions.
+        </p>
+      </div>
+      <!-- <div class="columns is-centered">
+          <img src="assets/images/handrefiner.png" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Hands refiner.
+      </h2> -->
+    <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Gradually latent fusion for temporal smoothness</h3>
+        <p>
+          We propose a progressive approach for generating long video with temporal smoothness.
+          During each denoising step, video segments are firstly denoised separately with the trained model, conditioning on the same reference image and the corresponding sub-sequence of poses. Within each denoising step, the overlapped frames, marked within dashed boxes in the figure, are progressively fused according to their frame positions. 
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/fig4.png" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Overlapped diffusion for generating any-length videos.
+      </h2>
+    </div>
+    </div>
+  </div>
+</section>
+<!-- End paper method -->
+
+<!-- Paper cmp -->
+<section class="hero is-light">
+  <div class="container is-max-desktop">
+    <!-- cmp -->
+    <div class="hero-body">
+      <div class="content has-text-justified">
+        <h2 class="title is-3">Comparison to state-of-the-art methods</h2>
+  </div>
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Quantitative evaluation</h3>
+        <p>
+          Our method achieves better hand generation quality, and more accurately adheres to the reference pose. Note that our method is not trained on the TikTok dataset.
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/experiments/cmp1.jpg" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Qualitative comparison to the state-of-the-art methods on TikTok test set.
+      </h2>
+      <div class="content has-text-justified">
+      <p>
+        We visualize the 106th frame from seq 338 of TikTok dataset and the pixel-wise difference between consecutive frames. MagicPose exhibits abrupt transitions, while Moore and MuseV show instability in texture and text. In contrast, our method demonstrates stable inter-frame differences and better temporal smoothness.
+      </p>
+      </div>
+      <div class="columns is-centered">
+        <img src="assets/images/experiments/cmp_tm1.jpg" style="max-width: 800px" />
+    </div>
+    <h2 class="subtitle has-text-centered">
+      Comparison of temporal smoothness with state-of-the-art methods.
+    </h2>
+      <!--   -->
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Quantitative evaluation</h3>
+      </div>
+  <body>
+      <table align="center">
+          <thead>
+              <tr style="font-size: 20px" >
+                  <th style="text-align:left">Method</th>
+                  <th style="padding: 0 16px;">FID-VID↓</th>
+                  <th style="padding: 0 16px;">FVD↓</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td style="text-align:left">MagicPose </td>
+                  <td>13.3</td>
+                  <td>916</td>
+              </tr>
+              <tr>
+                  <td style="text-align:left">Moore </td>
+                  <td>12.4</td>
+                  <td>728</td>
+              </tr>
+              <tr>
+                  <td style="text-align:left">MuseV </td>
+                  <td>14.6</td>
+                  <td>754</td>
+              </tr>
+              <tr>
+                  <td style="text-align:left">MimicMotion (ours)</td>
+                  <td ><b>9.3</b></td>
+                  <td ><b>594</b></td>
+              </tr>
+          </tbody>
+      </table>
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">User study</h3>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/experiments/userstudy_export.svg" style="max-width: 480px; width: 100%;" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Preference of MimicMotion (ours) over baseline methods on the TikTok dataset test split. Users prefer MimicMotion over other methods.
+      </h2>
+</div>
+</section>
+<!-- End paper cmp -->
+
+<!-- Paper Ablation -->
+<section class="hero is-small">
+  <div class="container is-max-desktop">
+    <!-- cmp -->
+    <div class="hero-body">
+      <div class="content has-text-justified">
+        <h2 class="title is-3">Ablation Study</h2>
+  </div>
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Confidence-aware pose guiding</h3>
+        <p>
+          This design enhances generation robustness to false guiding signals (Pose 1&2) and provides visibility hints to tackle pose ambiguity (Pose 3).
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/experiments/posealpha.jpg" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Confidence-aware pose guiding. 
+      </h2>
+      <!--   -->
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Hand region enhancement</h3>
+        <p>
+          Under identical reference image and pose guidance, training with hand enhancement consistently reduces hand distortion and enhances visual appeal.
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/experiments/handaug.jpg" style="max-width: 800px" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Hand region enhancement
+      </h2>
+      <!-- subsection -->
+      <div class="content has-text-justified">
+        <h3 class="title is-4">Progressive latent fusion</h3>
+        <p>
+          Progressive latent fusion enables smooth transitions and avoids abrupt changes across video segment
+          boundaries, thereby enhancing overall visual temporal coherence for long video generation.
+        </p>
+      </div>
+      <div class="columns is-centered">
+          <img src="assets/images/experiments/multidiff.jpg" style="max-width: 800px" />
+      </div>
+</div>
+</section>
+<!-- End paper Ablation -->
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+</section> -->
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  <script>
+    const videoContainer = document.querySelector('.video-container');
+    const video = document.querySelector('video');
+    const hoverImage = document.querySelector('.hover-image');
+    const caption = document.querySelector('.caption');
+    
+    videoContainer.addEventListener('mouseenter', () => {
+    // video.pause();
+    hoverImage.style.display = 'block';
+    caption.style.display = 'block';
+  });
+  
+  videoContainer.addEventListener('mouseleave', () => {
+        // video.play();
+        hoverImage.style.display = 'none';
+        caption.style.display = 'none';
+    });
+
+    </script>
+  </html>

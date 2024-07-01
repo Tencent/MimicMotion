@@ -1,0 +1,264 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+td {
+	font-size: 20px;
+}
+.page-container {
+    width: 1200px;
+    min-height: 1000px;
+    margin: 0 auto; /* top and bottom, right and left */
+    text-align: left; /* top, right, bottom, left */
+    padding-top: 0em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}
+
+
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+  }
+
+
+th.afhq {
+    width: 200px;  
+}
+th {
+    text-align: center;
+}
+.intra-link {
+    color: #4488ff;
+    text-decoration: underline;
+}
+a:active {
+    color: #4488ff;
+    text-decoration: underline;
+}
+a:visited {
+    color: #4488ff;
+    text-decoration: underline;
+}
+a:hover {
+    color: #ff0000;
+    text-decoration: none;
+}
+.reference {
+    font-size: 80%;
+}
+.emph {
+    color: #B1FF00;
+}
+
+.comparison-img {
+    width: 150px !important;
+}
+
+hr {
+    background-color: white;
+}
+
+.video-grid {
+    /* display: grid; */
+    /* grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+    /* gap: 1px; /* Adjust the gap between videos as needed */
+  }
+  
+  .video-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 48%;
+    /* height: 350px; /* Set the desired width */
+    /* padding-bottom: 350px; */
+    /* overflow: hidden; */
+  }
+  
+  
+  .video-wrapper video {
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .video-wrapper .hover-video {
+    display: none;
+  }
+  
+  .video-wrapper .overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-family: "Chalkduster";
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+  }
+  
+  .video-wrapper:hover .default-video {
+    display: none;
+  }
+  
+  .video-wrapper:hover .hover-video {
+    display: block;
+  }
+  
+  .video-wrapper:hover .overlay-text {
+    opacity: 1;
+  }
+  
+  
+  .video-wrapper video::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  .video-wrapper video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+  
+  .video-wrapper video::-webkit-media-controls-panel {
+    display: none !important;
+  }
+  
+  .video-wrapper video::-webkit-media-controls-play-button {
+    display: none !important;
+  }
+  
+  
+  
+  
+  .video-grid-wide {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns as needed */
+    gap: 1px; /* Adjust the gap between videos as needed */
+  }
+  
+  .video-warpper-wide {
+    position: relative;
+    width: 350px; /* Set the desired width */
+    height: 350px;
+    overflow: hidden;
+  }
+  
+  .video-warpper-wide video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .video-warpper-wide .hover-video {
+    display: none;
+  }
+  
+  .caption-vid {
+    display: inline-block;
+  }
+  
+  .video-warpper-wide .overlay-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-family: "Chalkduster";
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-align: center;
+  }
+  
+  .video-warpper-wide:hover .default-video {
+    display: none;
+  }
+  
+  .video-warpper-wide:hover .hover-video {
+    display: block;
+  }
+  
+  .video-warpper-wide:hover .overlay-text {
+    opacity: 1;
+  }
+
+/* Add by me */
+.container {
+    display: block;
+    text-align: center;
+}
+.gif {
+    display: block;
+    margin: 10px auto;
+    max-width: 800px; /* You can change this value to control the width of the video_comparison */
+}
+.input_image{
+  width: 256px; /* Set the desired width */
+  height:256px;
+}
+
+.input_image_ablation1{
+  width: 200px; /* Set the desired width */
+  height:200px;
+}
+.input_image_loop{
+  width: 512px; /* Set the desired width */
+  height:320px;
+}
+.input_image_frameinterp{
+  width: 340px; /* Set the desired width */
+}
+.input_image_motion{
+  width: 200px;
+}
+.input_image_story{
+  width: 150px;
+}
+
+
+.video-container {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.video-container:hover {
+  z-index: 2; /* Add this line to increase the z-index when hovering */
+}
+.hover-image {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+}
+
+.video-container:hover .hover-image {
+  display: block;
+}
+
+.caption {
+  display: none;
+  position: absolute;
+  /* bottom: -30px; Adjust this value to change the position of the caption */
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.video-container:hover .caption {
+  display: block;
+}
