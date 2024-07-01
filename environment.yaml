@@ -1,0 +1,16 @@
+name: mimicmotion
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.11
+  - pytorch=2.0.1
+  - torchvision=0.15.2
+  - pytorch-cuda=11.7
+  - pip
+  - pip:
+    - diffusers==0.27.0
+    - transformers==4.32.1
+    - decord==0.6.0
+    - einops
+    - omegaconf
