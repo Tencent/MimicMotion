@@ -2,7 +2,7 @@
 base_model_path: models/SVD/stable-video-diffusion-img2vid-xt-1-1
 
 # checkpoint path
-ckpt_path: models/MimicMotion_v0.9.pth
+ckpt_path: models/MimicMotion.pth
 
 test_case:
   - ref_video_path: assets/example_data/videos/pose1.mp4
