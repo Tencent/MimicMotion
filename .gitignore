@@ -158,3 +158,6 @@ _.*
 # models and outputs
 models/
 outputs/
+
+# Replicate
+.cog

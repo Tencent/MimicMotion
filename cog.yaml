@@ -1,0 +1,37 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+  # cuda: "11.7"
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.11"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "torch>=2.3" # 2.3.1
+    - "torchvision>=0.18" # 0.18.1
+    - "diffusers>=0.29" # 0.29.2
+    - "transformers>=4.42" # 4.42.3
+    - "decord>=0.6" # 0.6.0
+    - "einops>=0.8" # 0.8.0
+    - "omegaconf>=2.3" # 2.3.0
+    - "opencv-python>=4.10" # 4.10.0.84
+    - "matplotlib>=3.9" # 3.9.1
+    - "onnxruntime>=1.18" # 1.18.1
+    - "accelerate>=0.32" # 0.32.0
+    - "av>=12.2" # 12.2.0, https://github.com/continue-revolution/sd-webui-animatediff/issues/377
+    
+  # commands run after the environment is setup
+  run:
+    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.8.2/pget_linux_x86_64" && chmod +x /usr/local/bin/pget
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
