@@ -29,7 +29,13 @@ MimicMotion: High-Quality Human Motion Video Generation with Confidence-aware Po
 
 In recent years, generative artificial intelligence has achieved significant advancements in the field of image generation, spawning a variety of applications. However, video generation still faces considerable challenges in various aspects such as controllability, video length, and richness of details, which hinder the application and popularization of this technology. In this work, we propose a controllable video generation framework, dubbed *MimicMotion*, which can generate high-quality videos of arbitrary length with any motion guidance. Comparing with previous methods, our approach has several highlights. Firstly, with confidence-aware pose guidance, temporal smoothness can be achieved so model robustness can be enhanced with large-scale training data. Secondly, regional loss amplification based on pose confidence significantly eases the distortion of image significantly. Lastly, for generating long smooth videos, a progressive latent fusion strategy is proposed. By this means, videos of arbitrary length can be generated with acceptable resource consumption. With extensive experiments and user studies, MimicMotion demonstrates significant improvements over previous approaches in multiple aspects.
 
+## News
+
+* `[2024-07-01]`: Project page, code, technical report and a basic model checkpoint are released. A better checkpoint supporting higher quality video generation will be released very soon. Stay tuned!
+
 ## Quickstart
+
+For the initial released version of the model checkpoint, it supports generating videos with a maximum of 16 frames at a 576x1024 resolution. If you encounter insufficient memory issues, you can appropriately reduce the number of frames.
 
 ### Environment setup
 
@@ -78,11 +84,11 @@ models/
 
 ### Model inference
 
-We provide the inference script.
+A sample configuration for testing is provided as `test.yaml`. You can also easily modify the various configurations according to your needs.
+
 ```
 python inference.py --inference_config configs/test.yaml
 ```
-
 
 ## Citation	
 ```bib
