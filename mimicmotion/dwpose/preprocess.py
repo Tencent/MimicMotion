@@ -21,9 +21,9 @@ def get_video_pose(
     """
     # select ref-keypoint from reference pose for pose rescale
     ref_pose = dwprocessor(ref_image)
-    ref_keypoint_id = [0, 1, 2, 5, 8, 11, 14, 15, 16, 17]
+    ref_keypoint_id = [0, 1, 2, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
     ref_keypoint_id = [i for i in ref_keypoint_id \
-        if ref_pose['bodies']['score'].shape[0] > 0 and ref_pose['bodies']['score'][0][i] > 0.3]
+        if len(ref_pose['bodies']['subset']) > 0 and ref_pose['bodies']['subset'][0][i] >= .0]
     ref_body = ref_pose['bodies']['candidate'][ref_keypoint_id]
 
     height, width, _ = ref_image.shape

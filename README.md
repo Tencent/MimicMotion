@@ -31,11 +31,12 @@ In recent years, generative artificial intelligence has achieved significant adv
 
 ## News
 
-* `[2024-07-01]`: Project page, code, technical report and a basic model checkpoint are released. A better checkpoint supporting higher quality video generation will be released very soon. Stay tuned!
+* `[2024-07-08]`: 🔥 [A superior model checkpoint](https://huggingface.co/ixaac/MimicMotion/blob/main/MimicMotion_1-1.pth) has been released as version 1.1. The maximum number of video frames has now been expanded from 16 to 72, significantly enhancing the video quality!
+* `[2024-07-01]`: Project page, code, technical report and [a basic model checkpoint](https://huggingface.co/ixaac/MimicMotion/blob/main/MimicMotion_1.pth) are released. A better checkpoint supporting higher quality video generation will be released very soon. Stay tuned!
 
 ## Quickstart
 
-For the initial released version of the model checkpoint, it supports generating videos with a maximum of 16 frames at a 576x1024 resolution. If you encounter insufficient memory issues, you can appropriately reduce the number of frames.
+For the initial released version of the model checkpoint, it supports generating videos with a maximum of 72 frames at a 576x1024 resolution. If you encounter insufficient memory issues, you can appropriately reduce the number of frames.
 
 ### Environment setup
 
@@ -67,7 +68,7 @@ mkdir models
     ```
 3. Download the pre-trained checkpoint of MimicMotion from [Huggingface](https://huggingface.co/ixaac/MimicMotion)
     ```
-    curl -o models/MimicMotion.pth https://huggingface.co/ixaac/MimicMotion/resolve/main/MimicMotion.pth
+    wget -P models/ https://huggingface.co/ixaac/MimicMotion/resolve/main/MimicMotion_1-1.pth
     ```
 
 Finally, all the weights should be organized in models as follows
@@ -79,7 +80,7 @@ models/
 │   └── yolox_l.onnx
 ├── SVD
 │   └──stable-video-diffusion-img2vid-xt-1-1
-└── MimicMotion.pth
+└── MimicMotion_1-1.pth
 ```
 
 ### Model inference
