@@ -13,6 +13,9 @@ from torchvision.transforms.functional import pil_to_tensor, resize, center_crop
 from torchvision.transforms.functional import to_pil_image
 
 
+from mimicmotion.utils.geglu_patch import patch_geglu_inplace
+patch_geglu_inplace()
+
 from constants import ASPECT_RATIO
 
 from mimicmotion.pipelines.pipeline_mimicmotion import MimicMotionPipeline
