@@ -20,9 +20,17 @@ class DWposeDetector:
         device: (str) 'cpu' or 'cuda:{device_id}'
     """
     def __init__(self, model_det, model_pose, device='cpu'):
-        self.pose_estimation = Wholebody(model_det=model_det, model_pose=model_pose, device=device)
+        self.args = model_det, model_pose, device
+
+    def release_memory(self):
+        if hasattr(self, 'pose_estimation'):
+            del self.pose_estimation
+            import gc; gc.collect()
 
     def __call__(self, oriImg):
+        if not hasattr(self, 'pose_estimation'):
+            self.pose_estimation = Wholebody(*self.args)
+
         oriImg = oriImg.copy()
         H, W, C = oriImg.shape
         with torch.no_grad():
