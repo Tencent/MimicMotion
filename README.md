@@ -53,23 +53,17 @@ Please download weights manually as follows:
 cd MimicMotions/
 mkdir models
 ```
-1. Download SVD model: [stabilityai/stable-video-diffusion-img2vid-xt-1-1](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt-1-1)
+1. Download DWPose pretrained model: [dwpose](https://huggingface.co/yzd-v/DWPose/tree/main)
     ```
-    git lfs install
-    git clone https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt-1-1
-    mkdir -p models/SVD
-    mv stable-video-diffusion-img2vid-xt-1-1 models/SVD/
+    mkdir -p models/DWPose
+    wget https://hf-mirror.com/yzd-v/DWPose/resolve/main/yolox_l.onnx?download=true -O models/DWPose/yolox_l.onnx
+    wget https://hf-mirror.com/yzd-v/DWPose/resolve/main/dw-ll_ucoco_384.onnx?download=true -O models/DWPose/dw-ll_ucoco_384.onnx
     ```
-2. Download DWPose pretrained model: [dwpose](https://huggingface.co/yzd-v/DWPose/tree/main)
-    ```
-    git lfs install
-    git clone https://huggingface.co/yzd-v/DWPose
-    mv DWPose models/
-    ```
-3. Download the pre-trained checkpoint of MimicMotion from [Huggingface](https://huggingface.co/ixaac/MimicMotion)
+2. Download the pre-trained checkpoint of MimicMotion from [Huggingface](https://huggingface.co/ixaac/MimicMotion)
     ```
     wget -P models/ https://huggingface.co/ixaac/MimicMotion/resolve/main/MimicMotion_1-1.pth
     ```
+3. The SVD model [stabilityai/stable-video-diffusion-img2vid-xt-1-1](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt-1-1) will be automatically downloaded.
 
 Finally, all the weights should be organized in models as follows
 
@@ -78,8 +72,6 @@ models/
 ├── DWPose
 │   ├── dw-ll_ucoco_384.onnx
 │   └── yolox_l.onnx
-├── SVD
-│   └──stable-video-diffusion-img2vid-xt-1-1
 └── MimicMotion_1-1.pth
 ```
 
@@ -90,6 +82,8 @@ A sample configuration for testing is provided as `test.yaml`. You can also easi
 ```
 python inference.py --inference_config configs/test.yaml
 ```
+
+Tips: if your GPU memory is limited, try set env `PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:256`.
 
 ## Citation	
 ```bib

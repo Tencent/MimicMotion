@@ -1,5 +1,5 @@
 # base svd model path
-base_model_path: models/SVD/stable-video-diffusion-img2vid-xt-1-1
+base_model_path: stabilityai/stable-video-diffusion-img2vid-xt-1-1
 
 # checkpoint path
 ckpt_path: models/MimicMotion_1-1.pth
