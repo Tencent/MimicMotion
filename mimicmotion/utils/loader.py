@@ -22,9 +22,9 @@ class MimicMotionModel(torch.nn.Module):
         self.unet = UNetSpatioTemporalConditionModel.from_config(
             UNetSpatioTemporalConditionModel.load_config(base_model_path, subfolder="unet"))
         self.vae = AutoencoderKLTemporalDecoder.from_pretrained(
-            base_model_path, subfolder="vae").half()
+            base_model_path, subfolder="vae", torch_dtype=torch.float16, variant="fp16")
         self.image_encoder = CLIPVisionModelWithProjection.from_pretrained(
-            base_model_path, subfolder="image_encoder")
+            base_model_path, subfolder="image_encoder", torch_dtype=torch.float16, variant="fp16")
         self.noise_scheduler = EulerDiscreteScheduler.from_pretrained(
             base_model_path, subfolder="scheduler")
         self.feature_extractor = CLIPImageProcessor.from_pretrained(
@@ -39,8 +39,8 @@ def create_pipeline(infer_config, device):
         infer_config (str): 
         device (str or torch.device): "cpu" or "cuda:{device_id}"
     """
-    mimicmotion_models = MimicMotionModel(infer_config.base_model_path).to(device=device).eval()
-    mimicmotion_models.load_state_dict(torch.load(infer_config.ckpt_path, map_location=device), strict=False)
+    mimicmotion_models = MimicMotionModel(infer_config.base_model_path)
+    mimicmotion_models.load_state_dict(torch.load(infer_config.ckpt_path, map_location="cpu"), strict=False)
     pipeline = MimicMotionPipeline(
         vae=mimicmotion_models.vae, 
         image_encoder=mimicmotion_models.image_encoder, 

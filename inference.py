@@ -13,6 +13,9 @@ from torchvision.transforms.functional import pil_to_tensor, resize, center_crop
 from torchvision.transforms.functional import to_pil_image
 
 
+from mimicmotion.utils.geglu_patch import patch_geglu_inplace
+patch_geglu_inplace()
+
 from constants import ASPECT_RATIO
 
 from mimicmotion.pipelines.pipeline_mimicmotion import MimicMotionPipeline
@@ -60,11 +63,10 @@ def preprocess(video_path, image_path, resolution=576, sample_stride=2):
 
 def run_pipeline(pipeline: MimicMotionPipeline, image_pixels, pose_pixels, device, task_config):
     image_pixels = [to_pil_image(img.to(torch.uint8)) for img in (image_pixels + 1.0) * 127.5]
-    pose_pixels = pose_pixels.unsqueeze(0).to(device)
     generator = torch.Generator(device=device)
     generator.manual_seed(task_config.seed)
     frames = pipeline(
-        image_pixels, image_pose=pose_pixels, num_frames=pose_pixels.size(1),
+        image_pixels, image_pose=pose_pixels, num_frames=pose_pixels.size(0),
         tile_size=task_config.num_frames, tile_overlap=task_config.frames_overlap,
         height=pose_pixels.shape[-2], width=pose_pixels.shape[-1], fps=7,
         noise_aug_strength=task_config.noise_aug_strength, num_inference_steps=task_config.num_inference_steps,
