@@ -335,7 +335,7 @@ class Predictor(BasePredictor):
             )
             for img in image_pixels
         ]
-        pose_pixels = pose_pixels.unsqueeze(0).to(self.device)
+        # pose_pixels = pose_pixels.unsqueeze(0).to(self.device)
 
         generator = torch.Generator(device=self.device)
         generator.manual_seed(seed)
@@ -343,7 +343,7 @@ class Predictor(BasePredictor):
         frames = self.pipeline(
             image_pixels,
             image_pose=pose_pixels,
-            num_frames=pose_pixels.size(1),
+            num_frames=pose_pixels.size(0),
             tile_size=num_frames,
             tile_overlap=frames_overlap,
             height=pose_pixels.shape[-2],
