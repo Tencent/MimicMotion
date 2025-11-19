@@ -31,7 +31,7 @@ def get_video_pose(
 
     # read input video
     vr = decord.VideoReader(video_path, ctx=decord.cpu(0))
-    sample_stride *= max(1, int(vr.get_avg_fps() / 24))
+    # sample_stride *= max(1, int(vr.get_avg_fps() / 24))
 
     frames = vr.get_batch(list(range(0, len(vr), sample_stride))).asnumpy()
     detected_poses = [dwprocessor(frm) for frm in tqdm(frames, desc="DWPose")]
