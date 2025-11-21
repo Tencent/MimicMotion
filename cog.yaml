@@ -25,7 +25,7 @@ build:
     - "omegaconf>=2.3" # 2.3.0
     - "opencv-python>=4.10" # 4.10.0.84
     - "matplotlib>=3.9" # 3.9.1
-    - "onnxruntime>=1.18" # 1.18.1
+    - "onnxruntime-gpu>=1.18" # 1.18.1
     - "accelerate>=0.32" # 0.32.0
     - "av>=12.2" # 12.2.0, https://github.com/continue-revolution/sd-webui-animatediff/issues/377
     
