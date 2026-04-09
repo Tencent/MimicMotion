@@ -25,7 +25,14 @@ from mimicmotion.dwpose.preprocess import get_video_pose, get_image_pose
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s: [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+def _get_device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
+
+device = _get_device()
 
 
 def preprocess(video_path, image_path, resolution=576, sample_stride=2):

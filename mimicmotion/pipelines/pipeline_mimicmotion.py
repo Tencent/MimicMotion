@@ -546,8 +546,10 @@ class MimicMotionPipeline(DiffusionPipeline):
         self.pose_net.to(device)
         self.unet.to(device)
 
-        with torch.cuda.device(device):
-            torch.cuda.empty_cache()
+        _device_type = device.type if isinstance(device, torch.device) else str(device)
+        if _device_type == "cuda":
+            with torch.cuda.device(device):
+                torch.cuda.empty_cache()
 
         with self.progress_bar(total=len(timesteps) * len(indices)) as progress_bar:
             for i, t in enumerate(timesteps):
