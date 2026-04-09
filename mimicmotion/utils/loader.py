@@ -51,8 +51,9 @@ def create_pipeline(infer_config, device):
     for key in checkpoint.keys():
         if not any(key.startswith(expected_prefix) for expected_prefix in ['unet', 'vae', 'image_encoder', 'pose_net']):
             logger.warning(f"Unexpected key in checkpoint: {key}")
-    # Load model checkpoint and free the dict immediately
-    mimicmotion_models.load_state_dict(checkpoint, strict=False)
+    # Load model checkpoint using assign=True to avoid doubling memory
+    # (directly swaps parameter tensors instead of copying into existing ones)
+    mimicmotion_models.load_state_dict(checkpoint, strict=False, assign=True)
     del checkpoint
     pipeline = MimicMotionPipeline(
         vae=mimicmotion_models.vae,
