@@ -65,7 +65,7 @@ def preprocess(video_path, image_path, resolution=576, sample_stride=2):
     video_pose = get_video_pose(video_path, image_pixels, sample_stride=sample_stride)
     pose_pixels = np.concatenate([np.expand_dims(image_pose, 0), video_pose])
     image_pixels = np.transpose(np.expand_dims(image_pixels, 0), (0, 3, 1, 2))
-    return torch.from_numpy(pose_pixels.copy()) / 127.5 - 1, torch.from_numpy(image_pixels) / 127.5 - 1
+    return torch.from_numpy(pose_pixels) / 127.5 - 1, torch.from_numpy(image_pixels) / 127.5 - 1
 
 
 def run_pipeline(pipeline: MimicMotionPipeline, image_pixels, pose_pixels, device, task_config):

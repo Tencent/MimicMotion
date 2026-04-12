@@ -557,6 +557,10 @@ class MimicMotionPipeline(DiffusionPipeline):
             with torch.cuda.device(device):
                 torch.cuda.empty_cache()
 
+        # triangular tile-blend weight: constant across timesteps, hoist out of loop
+        weight = (torch.arange(tile_size, device=device) + 0.5) * 2. / tile_size
+        weight = torch.minimum(weight, 2 - weight)
+
         with self.progress_bar(total=len(timesteps) * len(indices)) as progress_bar:
             for i, t in enumerate(timesteps):
                 # expand the latents if we are doing classifier free guidance
@@ -569,8 +573,6 @@ class MimicMotionPipeline(DiffusionPipeline):
                 # predict the noise residual
                 noise_pred = torch.zeros_like(image_latents)
                 noise_pred_cnt = image_latents.new_zeros((num_frames,))
-                weight = (torch.arange(tile_size, device=device) + 0.5) * 2. / tile_size
-                weight = torch.minimum(weight, 2 - weight)
                 for idx in indices:
 
                     # classification-free inference
