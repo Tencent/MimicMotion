@@ -1,0 +1,16 @@
+name: mimicmotion
+channels:
+  - pytorch
+dependencies:
+  - python=3.11
+  - pytorch>=2.1.0
+  - torchvision>=0.16.0
+  - pip
+  - pip:
+    - diffusers==0.27.0
+    - transformers==4.32.1
+    - decord==0.6.0
+    - einops
+    - omegaconf
+    - onnxruntime
+    - opencv-python

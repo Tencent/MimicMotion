@@ -1,0 +1,15 @@
+base_model_path: stabilityai/stable-video-diffusion-img2vid-xt-1-1
+ckpt_path: models/MimicMotion_1-1.pth
+
+test_case:
+  - ref_video_path: assets/example_data/videos/pose1.mp4
+    ref_image_path: assets/example_data/images/demo1.jpg
+    num_frames: 8
+    resolution: 256
+    frames_overlap: 4
+    num_inference_steps: 2
+    noise_aug_strength: 0
+    guidance_scale: 2.0
+    sample_stride: 64
+    fps: 15
+    seed: 42

@@ -36,30 +36,33 @@ def create_pipeline(infer_config, device):
     """create mimicmotion pipeline and load pretrained weight
 
     Args:
-        infer_config (str): 
+        infer_config (str):
         device (str or torch.device): "cpu" or "cuda:{device_id}"
     """
     mimicmotion_models = MimicMotionModel(infer_config.base_model_path)
     # Implement safe globals whitelist
     if hasattr(torch.serialization, "safe_globals"):
         allowed_modules = ['torch', 'collections', '__main__', 'mimicmotion']
-        with torch.serialization.safe_globals(*allowed_modules):
+        with torch.serialization.safe_globals(allowed_modules):
             checkpoint = torch.load(infer_config.ckpt_path, map_location="cpu", weights_only=True)
     else:
         checkpoint = torch.load(infer_config.ckpt_path, map_location="cpu", weights_only=True)
-    # Load model checkpoint
-    mimicmotion_models.load_state_dict(checkpoint, strict=False)
     # Validate checkpoint structure before loading
     for key in checkpoint.keys():
         if not any(key.startswith(expected_prefix) for expected_prefix in ['unet', 'vae', 'image_encoder', 'pose_net']):
             logger.warning(f"Unexpected key in checkpoint: {key}")
+    # Load model checkpoint using assign=True to avoid doubling memory
+    # (directly swaps parameter tensors instead of copying into existing ones)
+    mimicmotion_models.load_state_dict(checkpoint, strict=False, assign=True)
+    del checkpoint
     pipeline = MimicMotionPipeline(
-        vae=mimicmotion_models.vae, 
-        image_encoder=mimicmotion_models.image_encoder, 
-        unet=mimicmotion_models.unet, 
+        vae=mimicmotion_models.vae,
+        image_encoder=mimicmotion_models.image_encoder,
+        unet=mimicmotion_models.unet,
         scheduler=mimicmotion_models.noise_scheduler,
-        feature_extractor=mimicmotion_models.feature_extractor, 
+        feature_extractor=mimicmotion_models.feature_extractor,
         pose_net=mimicmotion_models.pose_net
     )
+    del mimicmotion_models
     return pipeline
 

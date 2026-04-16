@@ -467,10 +467,15 @@ class MimicMotionPipeline(DiffusionPipeline):
         # corresponds to doing no classifier free guidance.
         self._guidance_scale = max_guidance_scale
 
+        _device_type = device.type if isinstance(device, torch.device) else str(device)
+        # On MPS (unified memory) CPU offloading is counterproductive
+        _offload = _device_type == "cuda"
+
         # 3. Encode input image
         self.image_encoder.to(device)
         image_embeddings = self._encode_image(image, device, num_videos_per_prompt, self.do_classifier_free_guidance)
-        self.image_encoder.cpu()
+        if _offload:
+            self.image_encoder.cpu()
 
         # NOTE: Stable Diffusion Video was conditioned on fps - 1, which
         # is why it is reduced here.
@@ -489,7 +494,8 @@ class MimicMotionPipeline(DiffusionPipeline):
             do_classifier_free_guidance=self.do_classifier_free_guidance,
         )
         image_latents = image_latents.to(image_embeddings.dtype)
-        self.vae.cpu()
+        if _offload:
+            self.vae.cpu()
 
         # Repeat the image latents for each frame so we can concatenate them with the noise
         # image_latents [batch, channels, height, width] ->[batch, num_frames, channels, height, width]
@@ -546,8 +552,14 @@ class MimicMotionPipeline(DiffusionPipeline):
         self.pose_net.to(device)
         self.unet.to(device)
 
-        with torch.cuda.device(device):
-            torch.cuda.empty_cache()
+        _device_type = device.type if isinstance(device, torch.device) else str(device)
+        if _device_type == "cuda":
+            with torch.cuda.device(device):
+                torch.cuda.empty_cache()
+
+        # triangular tile-blend weight: constant across timesteps, hoist out of loop
+        weight = (torch.arange(tile_size, device=device) + 0.5) * 2. / tile_size
+        weight = torch.minimum(weight, 2 - weight)
 
         with self.progress_bar(total=len(timesteps) * len(indices)) as progress_bar:
             for i, t in enumerate(timesteps):
@@ -561,8 +573,6 @@ class MimicMotionPipeline(DiffusionPipeline):
                 # predict the noise residual
                 noise_pred = torch.zeros_like(image_latents)
                 noise_pred_cnt = image_latents.new_zeros((num_frames,))
-                weight = (torch.arange(tile_size, device=device) + 0.5) * 2. / tile_size
-                weight = torch.minimum(weight, 2 - weight)
                 for idx in indices:
 
                     # classification-free inference
@@ -610,8 +620,9 @@ class MimicMotionPipeline(DiffusionPipeline):
 
                     latents = callback_outputs.pop("latents", latents)
 
-        self.pose_net.cpu()
-        self.unet.cpu()
+        if _offload:
+            self.pose_net.cpu()
+            self.unet.cpu()
 
         if not output_type == "latent":
             self.vae.decoder.to(device)
