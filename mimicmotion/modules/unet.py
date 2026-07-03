@@ -470,7 +470,7 @@ class UNetSpatioTemporalConditionModel(ModelMixin, ConfigMixin, UNet2DConditionL
             temb=emb,
             encoder_hidden_states=encoder_hidden_states,
             image_only_indicator=image_only_indicator,
-        )
+        ) # 영향 거의 없음
 
         # 5. up
         for i, upsample_block in enumerate(self.up_blocks):

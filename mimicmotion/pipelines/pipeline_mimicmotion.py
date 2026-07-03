@@ -539,7 +539,7 @@ class MimicMotionPipeline(DiffusionPipeline):
         # 8. Denoising loop
         self._num_timesteps = len(timesteps)
         indices = [[0, *range(i + 1, min(i + tile_size, num_frames))] for i in
-                   range(0, num_frames - tile_size + 1, tile_size - tile_overlap)]
+                   range(0, max(num_frames - tile_size, 0) + 1, tile_size - tile_overlap)]
         if indices[-1][-1] < num_frames - 1:
             indices.append([0, *range(num_frames - tile_size + 1, num_frames)])
 
@@ -564,6 +564,7 @@ class MimicMotionPipeline(DiffusionPipeline):
                 weight = (torch.arange(tile_size, device=device) + 0.5) * 2. / tile_size
                 weight = torch.minimum(weight, 2 - weight)
                 for idx in indices:
+                    tile_weight = weight[:len(idx)]
 
                     # classification-free inference
                     pose_latents = self.pose_net(image_pose[idx].to(device))
@@ -576,7 +577,7 @@ class MimicMotionPipeline(DiffusionPipeline):
                         image_only_indicator=image_only_indicator,
                         return_dict=False,
                     )[0]
-                    noise_pred[:1, idx] += _noise_pred * weight[:, None, None, None]
+                    noise_pred[:1, idx] += _noise_pred * tile_weight[:, None, None, None]
 
                     # normal inference
                     _noise_pred = self.unet(
@@ -588,9 +589,9 @@ class MimicMotionPipeline(DiffusionPipeline):
                         image_only_indicator=image_only_indicator,
                         return_dict=False,
                     )[0]
-                    noise_pred[1:, idx] += _noise_pred * weight[:, None, None, None]
+                    noise_pred[1:, idx] += _noise_pred * tile_weight[:, None, None, None]
 
-                    noise_pred_cnt[idx] += weight
+                    noise_pred_cnt[idx] += tile_weight
                     progress_bar.update()
                 noise_pred.div_(noise_pred_cnt[:, None, None, None])
 

@@ -1,12 +1,12 @@
 name: mimicmotion
 channels:
-  - pytorch
-  - nvidia
+  - conda-forge
 dependencies:
   - python=3.11
-  - pytorch=2.0.1
-  - torchvision=0.15.2
-  - pytorch-cuda=11.7
+  # NVIDIA RTX PRO 6000 Blackwell (sm_120) needs CUDA 12.8+ builds; the "pytorch"
+  # channel tops out at cuda12.4 (pre-Blackwell), so pin conda-forge's cuda129 build.
+  - pytorch=2.7.1=cuda129_mkl_py311_*
+  - torchvision=0.22.1=cuda129_py311_*
   - pip
   - pip:
     - diffusers==0.27.0
@@ -14,3 +14,9 @@ dependencies:
     - decord==0.6.0
     - einops
     - omegaconf
+    - huggingface_hub<0.26
+    - numpy<2
+    - opencv-python<4.10
+    - matplotlib
+    - onnxruntime-gpu==1.20.1
+    - accelerate
