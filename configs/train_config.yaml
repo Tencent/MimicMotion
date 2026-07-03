@@ -1,0 +1,43 @@
+base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
+init_checkpoint: models/MimicMotion_1-1.pth
+train_manifest: /mnt/SSD/datasets/MimicMotion/manifest_single_sample.json
+output_dir: trainlogs/train_base01
+
+num_epochs: 5000
+seed: 42
+resolution: 576
+num_frames: 8
+batch_size: 1
+num_workers: 4
+
+fps: 15
+motion_bucket_id: 127
+noise_aug_strength: 0
+
+learning_rate: 1.0e-5
+lr_warmup_steps: 500
+grad_clip: 1.0
+
+# sigma: lognormal, concentrated around the SVD training distribution.
+# loguniform down to sigma_min=0.002 was blowing up the EDM loss weight
+# (~1/sigma^2) and destabilizing full-parameter fine-tuning within a few
+# hundred steps (see 2026-07-03 debugging: output collapsed to pure noise
+# by step 600). lognormal avoids sampling those extreme low-sigma batches
+# nearly as often.
+sigma_sample_mode: lognormal
+sigma_data: 1.0
+p_mean: 0.7
+p_std: 1.6
+sigma_min: 0.002
+sigma_max: 700.0
+
+overfit_single_sample: true
+overfit_fixed_sigma: false
+
+# train_base1.py: >1.0 upweights the loss inside hand_mask_dir masks; 1.0 disables it
+hand_region_weight: 1.0
+# train_base1.py: probability of zeroing ref image/pose conditioning per step (CFG dropout)
+cond_drop_prob: 0.0
+
+print_every_steps: 20
+save_every_steps: 100

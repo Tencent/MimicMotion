@@ -1,0 +1,21 @@
+# base svd model path (same as training)
+base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
+
+# trained checkpoint to evaluate
+# ckpt_path: trainlogs/train_base01/checkpoints/step_00000300.pth
+ckpt_path: trainlogs/train_base01/checkpoints/step_00000200.pth
+
+# same manifest/resolution/num_frames used by train_base.py, so the
+# frames/poses/ref image are preprocessed identically to training
+train_manifest: /mnt/SSD/datasets/MimicMotion/manifest_single_sample.json
+sample_index: 0
+resolution: 576
+num_frames: 8
+
+num_inference_steps: 25
+noise_aug_strength: 0
+guidance_scale: 2.0
+fps: 15
+seed: 42
+
+output_dir: outputs

@@ -161,3 +161,8 @@ outputs/
 
 # Replicate
 .cog
+
+# training runs/checkpoints and eval artifacts
+trainlogs/
+evaluation_results/
+frame_vqvae_allskip01/
