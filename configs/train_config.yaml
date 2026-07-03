@@ -1,7 +1,7 @@
 base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
 init_checkpoint: models/MimicMotion_1-1.pth
 train_manifest: /mnt/SSD/datasets/MimicMotion/manifest_single_sample.json
-output_dir: trainlogs/train_base01
+output_dir: trainlogs/train_vq01
 
 num_epochs: 5000
 seed: 42
@@ -32,6 +32,9 @@ sigma_min: 0.002
 sigma_max: 700.0
 
 overfit_single_sample: true
+# Must be true whenever debug_overfit_single_batch (below) is also true --
+# see that key's comment for why (otherwise the "fixed batch" still gets a
+# different noise level every step and isn't actually fixed).
 overfit_fixed_sigma: false
 
 # train_base1.py: >1.0 upweights the loss inside hand_mask_dir masks; 1.0 disables it
@@ -41,3 +44,53 @@ cond_drop_prob: 0.0
 
 print_every_steps: 20
 save_every_steps: 100
+
+# train_vq.py: one-shot read-only UNet/PoseNet feature shape logging (see
+# feature_inspect.py). Prints once on the first forward pass, then hooks
+# remove themselves; no effect on training either way. Off by default.
+enable_feature_inspection: false
+
+# train_vq.py: spatio-temporal continuous tokenizer auxiliary branch (see
+# visual_tokenizer.py: SpatioTemporalContinuousTokenizer). No pose
+# encoder/FiLM/VQ/codebook yet; reconstruction is not injected back into the
+# UNet. False reproduces the baseline exactly.
+enable_continuous_tokenizer: true
+# Selected via feature inspection (2026-07-03): down_blocks[1] output,
+# shape (B*T, 640, 32, 18) for resolution=576/num_frames=8. Informational
+# only (the hook target itself is hardcoded to down_blocks[1] in train_vq.py).
+visual_feature_name: down_blocks[1].output
+temporal_patch_size: 4
+spatial_patch_height: 4
+spatial_patch_width: 3
+visual_embed_dim: 64
+lambda_tokenizer_reconstruction: 1.0
+detach_tokenizer_input: true
+# Required (no fallback) whenever enable_continuous_tokenizer is true; the
+# tokenizer is always its own optimizer param group, separate from learning_rate.
+#
+# 2026-07-03 debug_overfit_single_batch validation: at the "default-looking"
+# value of 1e-5 (same as learning_rate) the tokenizer barely moved even after
+# 60 steps. patch_dim=30720 -> embed_dim=64 is a 480x compression bottleneck
+# (Lt=4 * Ph=4 * Pw=3 * C=640), so a small linear encoder/decoder needs a much
+# higher LR than the UNet's own 1e-5 to make visible progress in a short debug
+# run. 1e-2 reached 71% reconstruction_loss reduction and cosine_similarity
+# 0.002->0.87 in 150 steps (still decreasing, not yet plateaued). Use
+# something in the 1e-3~1e-2 range for debug_overfit_single_batch runs; a
+# real long training run can likely use something more modest.
+tokenizer_learning_rate: 1.0e-2
+
+# Debug: repeat one batch for debug_overfit_steps steps, then print an
+# initial-vs-final reconstruction_loss/cosine_similarity report and stop
+# (instead of training indefinitely). Only meaningful with
+# enable_continuous_tokenizer: true.
+#
+# 2026-07-03: this only overfits a truly FIXED input if overfit_fixed_sigma
+# is also true. With overfit_fixed_sigma: false (the default), sigma/noise
+# are re-sampled every step even though the video/pose batch is fixed, so the
+# down_blocks[1] feature the tokenizer sees is DIFFERENT every step (varying
+# noise level) -- not a fixed target at all. That first attempt showed
+# reconstruction_loss barely moving (even getting worse over 60 steps). Set
+# overfit_fixed_sigma: true whenever debug_overfit_single_batch is true, or
+# the "single-batch overfit" report is meaningless.
+debug_overfit_single_batch: false
+debug_overfit_steps: 500

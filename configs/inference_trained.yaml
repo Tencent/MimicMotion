@@ -3,7 +3,7 @@ base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
 
 # trained checkpoint to evaluate
 # ckpt_path: trainlogs/train_base01/checkpoints/step_00000300.pth
-ckpt_path: trainlogs/train_base01/checkpoints/step_00000200.pth
+ckpt_path: trainlogs/train_vq01/checkpoints/last_00000316.pth
 
 # same manifest/resolution/num_frames used by train_base.py, so the
 # frames/poses/ref image are preprocessed identically to training
