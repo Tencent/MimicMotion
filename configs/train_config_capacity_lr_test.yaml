@@ -1,7 +1,12 @@
 base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
-init_checkpoint: models/MimicMotion_1-1.pth
+# resume UNet/PoseNet from the train_all348 run (step 19475) instead of the
+# original pretrained checkpoint -- continuous_tokenizer/pose_bundle_encoder
+# are not in this checkpoint's unet./pose_net. prefixes, so they still start
+# fresh regardless (unavoidable anyway since visual_embed_dim is changing
+# shape below).
+init_checkpoint: trainlogs/train_all348/checkpoints/last_00019475.pth
 train_manifest: /mnt/SSD/datasets/MimicMotion/train_manifest_all.json
-output_dir: trainlogs/train_all348
+output_dir: trainlogs/train_capacity_lr_test01
 
 num_epochs: 5000
 seed: 42
@@ -17,6 +22,17 @@ noise_aug_strength: 0
 learning_rate: 1.0e-5
 lr_warmup_steps: 500
 grad_clip: 1.0
+
+# Diagnostic test (2026-07-06): train_all348's continuous_tokenizer cos_sim
+# plateaued around step ~8000-10000 (mean cos_sim per 1920-step window went
+# 0.42 -> 0.50 by step ~9000, then flat/noisy at 0.44-0.50 through step
+# 19475 -- measured directly from trainlogs/train_all348's log, not
+# assumed). Testing two hypotheses together: (a) capacity ceiling from the
+# 480x compression bottleneck (visual_embed_dim 64 -> 128 below), and (b) LR
+# decay -- tokenizer_learning_rate was flat at full value with no decay
+# after warmup. lr_decay_steps=3000 matches this test's planned run length.
+lr_decay_steps: 3000
+lr_decay_min_scale: 0.1
 
 # sigma: lognormal, concentrated around the SVD training distribution.
 # loguniform down to sigma_min=0.002 was blowing up the EDM loss weight
@@ -68,7 +84,10 @@ visual_feature_name: down_blocks[1].output
 temporal_patch_size: 4
 spatial_patch_height: 4
 spatial_patch_width: 3
-visual_embed_dim: 64
+# 2026-07-06: doubled 64 -> 128 to test whether the 480x compression
+# bottleneck (patch_dim=30720) was capping cos_sim once training moved from
+# 14 samples to 348 diverse samples (see lr_decay_steps comment above).
+visual_embed_dim: 128
 # 2026-07-05: lowered from 1.0 to 0.1 once enable_continuous_adapter_injection
 # became available -- this is now the first stage where diffusion_loss itself
 # can be affected by the adapter, so the auxiliary reconstruction loss should

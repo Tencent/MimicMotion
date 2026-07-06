@@ -1,0 +1,29 @@
+base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
+init_checkpoint: models/MimicMotion_1-1.pth
+train_manifest: /mnt/SSD/datasets/MimicMotion/manifest_single_sample.json
+output_dir: trainlogs/frame_no_vq_baseline01
+
+seed: 42
+resolution: 576
+num_frames: 8
+batch_size: 1
+num_workers: 4
+
+fps: 15
+motion_bucket_id: 127
+noise_aug_strength: 0
+
+# VQ 학습 코드의 sigma 설정과 동일
+sigma_sample_mode: loguniform
+sigma_min: 0.002
+sigma_max: 700.0
+p_mean: 0.0
+p_std: 0.7
+
+num_epochs: 500
+max_steps: null
+overfit_single_sample: true
+fixed_sigma: false
+shuffle: false
+
+print_every_steps: 20

@@ -2,7 +2,9 @@
 base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
 
 # checkpoint path
-ckpt_path: models/MimicMotion_1-1.pth
+# ckpt_path: trainlogs/train_base01/checkpoints/step_00000300.pth
+# ckpt_path: trainlogs/train_base01/checkpoints/step_00000100.pth
+ckpt_path: trainlogs/train_capacity_lr_test01/checkpoints/step_00000600.pth
 
 test_case:
   - ref_video_path: assets/example_data/videos/pose1_4s.mp4

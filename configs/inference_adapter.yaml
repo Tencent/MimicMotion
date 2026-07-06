@@ -1,0 +1,40 @@
+# base svd model path (same as training)
+base_model_path: models/stable-video-diffusion-img2vid-xt-1-1
+
+# trained checkpoint to evaluate (must have been saved with
+# enable_continuous_adapter_injection: true so it contains
+# continuous_adapter_injector.* / pose_conditioned_film.* / etc. keys)
+ckpt_path: /tmp/claude-0/-workspace-Workspace-MimicMotion/01e0bc91-d2a4-417f-9683-44d448868015/scratchpad/injection_debug_run/checkpoints/last_00000300.pth
+
+# the train_vq.py config that produced ckpt_path -- read to reconstruct the
+# tokenizer/pose_bundle_encoder/pose_conditioned_film/injector with the exact
+# same hyperparameters used at training time
+adapter_train_config: /tmp/claude-0/-workspace-Workspace-MimicMotion/01e0bc91-d2a4-417f-9683-44d448868015/scratchpad/injection_debug_config.yaml
+
+# same manifest/resolution/num_frames used by train_vq.py, so the
+# frames/poses/ref image are preprocessed identically to training
+train_manifest: /mnt/SSD/datasets/MimicMotion/manifest_single_sample.json
+sample_index: 0
+resolution: 576
+num_frames: 8
+
+num_inference_steps: 25
+noise_aug_strength: 0
+guidance_scale: 2.0
+fps: 15
+seed: 42
+
+# IMPORTANT: pose_pixels passed to the pipeline is [ref_pose, driving_pose...]
+# = num_frames+1 = 9 frames total (see inference_with_adapter.py). The
+# pipeline's default tile_size (= total frame count, 9) is NOT divisible by
+# temporal_patch_size=4, which the trained visual_tokenizer/pose_bundle_encoder
+# require (real error hit on first run: "T=9 ... T%Lt=1"). The pipeline's own
+# tiling always produces tiles of exactly `tile_size` frames (verified by
+# reading pipeline_mimicmotion.py's indices construction), so setting
+# tile_size to a multiple of temporal_patch_size -- matching the num_frames=8
+# used at training time -- makes every tile T=8, divisible by 4.
+tile_size: 8
+frames_overlap: 0
+
+save_side_by_side: true
+output_dir: outputs
